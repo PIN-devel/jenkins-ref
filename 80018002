@@ -1,0 +1,15 @@
+upstream demo {
+    server localhost:8001;
+    server localhost:8002;
+}
+
+server {
+    listen 80;
+    server_name _;
+
+    location / {
+        proxy_pass http://demo;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+    }
+}
